@@ -1,0 +1,23 @@
+name: Test Pinecone Action
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-action:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run Pinecone Action
+        uses: Ve2s4/gibble-frontend/apps/action@main
+        with:
+          project_id: ${{ secrets.PROJECT_ID }}
+          api_key: ${{ secrets.API_KEY }}
+          github_token: ${{ secrets.ACTIONS_PAT }}
+
