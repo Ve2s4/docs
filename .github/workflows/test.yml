@@ -23,7 +23,7 @@ jobs:
           node-version: 20  # Use Node.js 20 (or your preferred version)
 
       - name: Gibble Workflows
-        uses: Ve2s4/gibble-action@v0
+        uses: Ve2s4/gibble-action@v1
         with:
           api_key: 'test api key'
           project_id: 'test project api'
