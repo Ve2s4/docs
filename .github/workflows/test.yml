@@ -1,23 +1,29 @@
-name: Test Pinecone Action
+name: Test Docs Scanner Action
 
 on:
   push:
     branches:
-      - main
+      - main  # Trigger on pushes to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger on pull requests to the main branch
 
 jobs:
   test-action:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Run Pinecone Action
-        uses: Ve2s4/gibble-frontend/apps/action@main
         with:
-          project_id: ${{ secrets.PROJECT_ID }}
-          api_key: ${{ secrets.API_KEY }}
-          github_token: ${{ secrets.ACTIONS_PAT }}
+          fetch-depth: 0  # Fetch all history for full scan
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20  # Use Node.js 20 (or your preferred version)
+
+      - name: Gibble Workflows
+        uses: Ve2s4/gibble-action@v.0.0.1
+        with:
+          api_key: 'test api key'
+          project_id: 'test project id'
